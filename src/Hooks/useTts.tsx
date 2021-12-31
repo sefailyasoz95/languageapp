@@ -4,7 +4,6 @@ import {options} from '../Constants/speakOptions';
 
 const useTts = (language?: string) => {
   useEffect(() => {
-    Tts.setDefaultLanguage(language || 'tr-TR');
     // Tts.setDefaultVoice('com.apple.ttsbundle.Moira-compact');
     Tts.getInitStatus().then(
       () => {},
@@ -16,10 +15,15 @@ const useTts = (language?: string) => {
     );
     //   Tts.voices().then(voices => console.log(voices));
   }, []);
-  const speak = (text: string) => {
+  const speakTR = async (text: string) => {
+    await Tts.setDefaultLanguage('tr-TR');
     Tts.speak(text, options);
   };
-  return {speak};
+  const speakEN = async (text: string) => {
+    await Tts.setDefaultLanguage('en-US');
+    Tts.speak(text, options);
+  };
+  return {speakTR, speakEN};
 };
 
 export default useTts;
