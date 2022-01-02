@@ -13,17 +13,24 @@ type Props = {
 const CategoryListScreen = ({navigation, route}: Props) => {
   const {category} = route.params;
   return (
-    <>
+    <View
+      style={{
+        width: '95%',
+        justifyContent: 'center',
+        flex: 1,
+      }}>
       <SharedElement id={`${category.id}.${category.categoryNameEN}`}>
-        <Image
+        <ImageBackground
           source={category.image}
           width={10}
           height={10}
           style={styles.img}
         />
       </SharedElement>
-      <Text style={styles.text}>{category.categoryNameEN}</Text>
-    </>
+      <Text style={styles.text} onPress={() => navigation.goBack()}>
+        {category.categoryNameEN}
+      </Text>
+    </View>
   );
 };
 
@@ -31,7 +38,6 @@ export default CategoryListScreen;
 
 const styles = StyleSheet.create({
   img: {
-    resizeMode: 'cover',
     width: '100%',
     height: '100%',
     alignSelf: 'center',
