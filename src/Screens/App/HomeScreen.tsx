@@ -28,27 +28,16 @@ const HomeScreen = ({navigation}: Props) => {
     console.log('x: ', x);
     setData(x);
   };
-  useEffect(() => {
-    // speakTR('hello world once again');
-    // get();
-  }, []);
+
   const showCategoryItems = async (item: any) => {
-    // await speakTR(item.categoryNameTR);
-    // await speakEN(item.categoryNameEN);
+    await speakTR(item.categoryNameTR);
+    await speakEN(item.categoryNameEN);
     navigation.navigate('CategoryList', {category: item});
   };
   return (
-    <SafeAreaView style={styles.container}>
-      {/* {data && (
-        <Image
-          source={{uri: data}}
-          width={50}
-          height={50}
-          style={{width: 250, height: 250}}
-        />
-      )} */}
+    <View style={styles.container}>
       <CategoryList showCategoryItems={showCategoryItems} />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -59,6 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#303030',
+    marginTop: '10%',
   },
 });

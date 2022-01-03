@@ -9,7 +9,13 @@ interface Props {}
 const App = createSharedElementStackNavigator();
 const AppStack = (props: Props) => {
   return (
-    <App.Navigator screenOptions={{headerShown: false}}>
+    <App.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyle: {
+          backgroundColor: '#999',
+        },
+      }}>
       <App.Screen name="Home" component={HomeScreen} />
       <App.Screen name="Detail" component={DetailScreen} />
       <App.Screen

@@ -1,19 +1,14 @@
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useEffect, useState} from 'react';
-import {
-  FlatList,
-  Image,
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SharedElement} from 'react-navigation-shared-element';
+import Animal from '../../Components/Category/Animal';
+import Color from '../../Components/Category/Color';
+import Number from '../../Components/Category/Number';
+import Obj from '../../Components/Category/Obj';
 import {animals, colors, numbers, objects} from '../../Constants/data';
+import useTts from '../../Hooks/useTts';
 import {AppStackParamList} from '../../StackParamLists/AppStackParamList';
 
 type Props = {
@@ -22,8 +17,10 @@ type Props = {
 };
 
 const CategoryListScreen = ({navigation, route}: Props) => {
+  const {speakTR, speakEN} = useTts();
   const {category} = route.params;
   const [dataSource, setDataSource] = useState<any[]>([]);
+  const [disabled, setDisabled] = useState(false);
   useEffect(() => {
     if (category.categoryNameEN === 'Numbers') {
       setDataSource(numbers);
@@ -36,45 +33,79 @@ const CategoryListScreen = ({navigation, route}: Props) => {
     }
   }, []);
   return (
-    <>
-      <SharedElement id={`${category.id}.${category.categoryNameEN}`}>
+    <SafeAreaView style={{alignSelf: 'center'}}>
+      <SharedElement
+        id={`${category.id}.${category.categoryNameEN}`}
+        style={{alignItems: 'center', justifyContent: 'center'}}>
         <Text style={styles.header} onPress={() => navigation.goBack()}>
-          {`${category.categoryNameTR} / ${category.categoryNameEN}`}
+          {`⬅ ${category.categoryNameTR} / ${category.categoryNameEN}`}
         </Text>
       </SharedElement>
-      {/* <FlatList
-        data={dataSource}
-        style={styles.dataContainer}
-        contentContainerStyle={styles.contentContainer}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.textContainer}
-            // onPress={() => navigation.goBack()}
-          >
-            <Text key={item} style={styles.text}>
-              {item}
-            </Text>
-          </TouchableOpacity>
-        )}
-      /> */}
+      {disabled && (
+        <View style={styles.overlay}>
+          <Text style={styles.overlayContent}>{`🔊`} </Text>
+        </View>
+      )}
       <ScrollView
         style={styles.dataContainer}
         contentContainerStyle={styles.contentContainer}>
-        {dataSource.map((item, index) => (
-          <TouchableOpacity
-            style={styles.textContainer}
-            key={index}
-            // onPress={() => navigation.goBack()}
-          >
-            <Text style={styles.text}>{item.value}</Text>
-            <View style={styles.trenContainer}>
-              <Text style={styles.tren}>{`${item.tr} / `}</Text>
-              <Text style={styles.tren}>{item.en}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+        {dataSource.map((item, index) =>
+          category.categoryNameEN === 'Colors' ? (
+            <Color
+              key={index}
+              item={item}
+              onPress={async () => {
+                setDisabled(true);
+                await speakTR(item.tr);
+                await speakEN(item.en);
+                setTimeout(() => {
+                  setDisabled(false);
+                }, 3000);
+              }}
+            />
+          ) : category.categoryNameEN === 'Numbers' ? (
+            <Number
+              key={index}
+              item={item}
+              onPress={async () => {
+                setDisabled(true);
+                await speakTR(item.tr);
+                await speakEN(item.en);
+                setTimeout(() => {
+                  setDisabled(false);
+                }, 3000);
+              }}
+            />
+          ) : category.categoryNameEN === 'Animals' ? (
+            <Animal
+              key={index}
+              item={item}
+              onPress={async () => {
+                setDisabled(true);
+                await speakTR(item.tr);
+                await speakEN(item.en);
+                setTimeout(() => {
+                  setDisabled(false);
+                }, 3000);
+              }}
+            />
+          ) : (
+            <Obj
+              key={index}
+              item={item}
+              onPress={async () => {
+                setDisabled(true);
+                await speakTR(item.tr);
+                await speakEN(item.en);
+                setTimeout(() => {
+                  setDisabled(false);
+                }, 3000);
+              }}
+            />
+          ),
+        )}
       </ScrollView>
-    </>
+    </SafeAreaView>
   );
 };
 
@@ -108,13 +139,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 5,
   },
-  dataContainer: {
-    borderWidth: 1,
-    borderStyle: 'solid',
-  },
+  dataContainer: {},
   contentContainer: {
-    borderWidth: 1,
-    borderStyle: 'solid',
     alignItems: 'center',
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',
@@ -128,5 +154,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  overlay: {
+    width: '100%',
+    height: '120%',
+    position: 'absolute',
+    flex: 1,
+    alignSelf: 'center',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    zIndex: 10000,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  overlayContent: {
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 100,
   },
 });

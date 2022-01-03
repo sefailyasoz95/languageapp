@@ -36,10 +36,6 @@ const CategoryList = ({showCategoryItems}: Props) => {
                 styles.text
               }>{`${item.categoryNameTR} / ${item.categoryNameEN}`}</Text>
           </SharedElement>
-          <Text
-            style={
-              styles.text
-            }>{`${item.categoryNameTR} / ${item.categoryNameEN}`}</Text>
         </TouchableOpacity>
       )}
     />
@@ -66,6 +62,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: 'absolute',
     alignSelf: 'center',
+    bottom: '50%',
   },
   imgBackground: {
     width: 250,
