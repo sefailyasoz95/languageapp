@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SharedElement} from 'react-navigation-shared-element';
-import {Categories} from '../../Constants/data';
+import {Categories} from '../../Constants/categoryData';
 
 type Props = {
   showCategoryItems(params: any): void;
@@ -24,13 +24,17 @@ const CategoryList = ({showCategoryItems}: Props) => {
           key={item.id}
           style={styles.renderItem}
           onPress={() => showCategoryItems(item)}>
+          <Image
+            source={item.image}
+            height={120}
+            width={150}
+            style={styles.imgBackground}
+          />
           <SharedElement id={`${item.id}.${item.categoryNameEN}`}>
-            <Image
-              source={item.image}
-              height={120}
-              width={150}
-              style={styles.imgBackground}
-            />
+            <Text
+              style={
+                styles.text
+              }>{`${item.categoryNameTR} / ${item.categoryNameEN}`}</Text>
           </SharedElement>
           <Text
             style={
