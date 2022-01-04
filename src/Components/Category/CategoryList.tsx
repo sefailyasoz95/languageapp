@@ -19,6 +19,7 @@ const CategoryList = ({showCategoryItems}: Props) => {
   return (
     <FlatList
       data={Categories}
+      showsVerticalScrollIndicator={false}
       renderItem={({item}) => (
         <TouchableOpacity
           key={item.id}
@@ -58,11 +59,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 22,
     backgroundColor: 'rgba(255,255,255,0.5)',
-    color: '#000',
     borderRadius: 10,
+    color: '#000',
     position: 'absolute',
     alignSelf: 'center',
     bottom: '50%',
+    padding: 2,
   },
   imgBackground: {
     width: 250,

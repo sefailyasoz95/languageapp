@@ -1,3 +1,14 @@
+import {
+  getbunny,
+  getcat,
+  getdog,
+  getduck,
+  getelephant,
+  getfox,
+  getkoala,
+  getpanda,
+} from '../Utils/animalAPI';
+
 export const numbers = [
   {value: 0, tr: 'sıfır', en: 'zero'},
   {value: 1, tr: 'bir', en: 'one'},
@@ -102,14 +113,14 @@ export const numbers = [
   {value: 100, tr: 'yüz', en: 'one hundred'},
 ];
 export const animals = [
-  {value: 'elephant', tr: 'fil', en: 'elephant'},
-  {value: 'dog', tr: 'köpek', en: 'dog'},
-  {value: 'cat', tr: 'kedi', en: 'cat'},
-  {value: 'bunny', tr: 'tavşan', en: 'bunny'},
-  {value: 'duck', tr: 'ördek', en: 'duck'},
-  {value: 'fox', tr: 'tilki', en: 'fox'},
-  {value: 'koala', tr: 'koala', en: 'koala'},
-  {value: 'panda', tr: 'panda', en: 'panda'},
+  {value: 'elephant', tr: 'fil', en: 'elephant', url: getelephant},
+  {value: 'dog', tr: 'köpek', en: 'dog', url: getdog},
+  {value: 'cat', tr: 'kedi', en: 'cat', url: getcat},
+  {value: 'bunny', tr: 'tavşan', en: 'bunny', url: getbunny},
+  {value: 'duck', tr: 'ördek', en: 'duck', url: getduck},
+  {value: 'fox', tr: 'tilki', en: 'fox', url: getfox},
+  {value: 'koala', tr: 'koala', en: 'koala', url: getkoala},
+  {value: 'panda', tr: 'panda', en: 'panda', url: getpanda},
 ];
 export const colors = [
   {value: 'red', tr: 'kırmızı', en: 'red'},
@@ -120,6 +131,9 @@ export const colors = [
   {value: 'white', tr: 'beyaz', en: 'white'},
   {value: 'black', tr: 'siyah', en: 'black'},
   {value: 'orange', tr: 'turuncu', en: 'orange'},
+  {value: 'pink', tr: 'pembe', en: 'pink'},
+  {value: 'turquoise', tr: 'turkuaz', en: 'turquoise'},
+  {value: 'grey', tr: 'gri', en: 'grey'},
 ];
 export const objects = [
   {value: 'table', tr: 'masa', en: 'table'},

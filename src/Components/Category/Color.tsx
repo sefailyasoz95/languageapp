@@ -3,10 +3,10 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface Props {
   item: any;
-  onPress: () => void;
+  onPress: (item: any) => void;
 }
 
-const Color = ({item, onPress}: Props) => {
+const Color = React.memo(({item, onPress}: Props) => {
   return (
     <TouchableOpacity
       style={[styles.textContainer, {borderColor: item.value}]}
@@ -18,7 +18,7 @@ const Color = ({item, onPress}: Props) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 export default Color;
 
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: 'center',
     width: '75%',
+    elevation: 10,
   },
   tren: {
     fontWeight: 'bold',

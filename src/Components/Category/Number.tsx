@@ -3,10 +3,10 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface Props {
   item: any;
-  onPress: () => void;
+  onPress: (item: any) => void;
 }
 
-const Number = ({item, onPress}: Props) => {
+const Number = React.memo(({item, onPress}: Props) => {
   return (
     <TouchableOpacity style={styles.textContainer} onPress={onPress}>
       <Text style={styles.text}>{item.value}</Text>
@@ -16,7 +16,7 @@ const Number = ({item, onPress}: Props) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 export default Number;
 
@@ -27,18 +27,20 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   textContainer: {
-    borderWidth: 1,
     alignItems: 'center',
-    borderStyle: 'solid',
+    elevation: 10,
     borderRadius: 12,
     margin: 5,
     justifyContent: 'center',
     padding: 5,
-    width: '45%',
+    width: '46%',
+    backgroundColor: '#bbb',
   },
   tren: {
-    fontSize: 14,
     fontStyle: 'italic',
+    fontWeight: 'bold',
+    color: 'black',
+    fontSize: 12,
   },
   trenContainer: {
     flexDirection: 'row',
