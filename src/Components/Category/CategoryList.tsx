@@ -6,6 +6,7 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
+  View,
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SharedElement} from 'react-navigation-shared-element';
@@ -47,18 +48,24 @@ export default CategoryList;
 
 const styles = StyleSheet.create({
   renderItem: {
-    borderWidth: 1,
-    borderStyle: 'solid',
     backgroundColor: '#fff',
     margin: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    elevation: 12,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 1,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    borderRadius: 10,
   },
   text: {
     letterSpacing: 1,
     fontWeight: 'bold',
     fontSize: 22,
-    backgroundColor: 'rgba(255,255,255,0.5)',
     borderRadius: 10,
     color: '#000',
     position: 'absolute',
@@ -70,5 +77,6 @@ const styles = StyleSheet.create({
     width: 250,
     height: 120,
     resizeMode: 'cover',
+    borderRadius: 10,
   },
 });

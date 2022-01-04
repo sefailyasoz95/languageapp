@@ -6,16 +6,16 @@ import {options, optionsTR} from '../Constants/speakOptions';
 const useTts = () => {
   useEffect(() => {
     Tts.setDucking(true);
-    // Tts.addEventListener('tts-start', async event => {
-    //   console.log('start: ', event);
-    // });
-    // Tts.addEventListener('tts-progress', async event => {
-    //   console.log('progress: ', event);
-    // });
-    // Tts.addEventListener('tts-finish', async event => {
-    //   console.log('finish: ', event);
-    // });
-    // Tts.addEventListener('tts-cancel', event => console.log('cancel', event));
+    Tts.addEventListener('tts-start', async event => {
+      // console.log('start: ', event);
+    });
+    Tts.addEventListener('tts-progress', async event => {
+      // console.log('progress: ', event);
+    });
+    Tts.addEventListener('tts-finish', async event => {
+      // console.log('finish: ', event);
+    });
+    Tts.addEventListener('tts-cancel', event => console.log('cancel', event));
     Tts.getInitStatus().then(
       () => {},
       err => {
@@ -35,18 +35,15 @@ const useTts = () => {
       ? await Tts.setDefaultVoice('tr-TR-language').then(async res => {
           Tts.speak(text, optionsTR);
         })
-      : await Tts.setDefaultLanguage('tr-TR').then(async res => {
-          Tts.speak(text, optionsTR);
-        });
+      : Tts.speak(text, optionsTR);
   };
+
   const speakEN = async (text: string) => {
     Platform.OS === 'android'
       ? await Tts.setDefaultVoice('en-us-x-tpf-local').then(async res => {
           Tts.speak(text, options);
         })
-      : await Tts.setDefaultLanguage('en-US').then(async res => {
-          Tts.speak(text, options);
-        });
+      : Tts.speak(text, options);
   };
   return {speakTR, speakEN};
 };

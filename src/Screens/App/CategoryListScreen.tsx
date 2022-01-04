@@ -1,16 +1,7 @@
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useEffect, useState} from 'react';
-import {
-  FlatList,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SharedElement} from 'react-navigation-shared-element';
 import Animal from '../../Components/Category/Animal';
 import Color from '../../Components/Category/Color';
@@ -47,25 +38,16 @@ const CategoryListScreen = ({navigation, route}: Props) => {
     await speakEN(item.en);
     setTimeout(() => {
       setDisabled(false);
-    }, 2500);
+    }, 3000);
   }, []);
   return (
     <SafeAreaView>
-      <SharedElement
-        id={`${category.id}.${category.categoryNameEN}`}
-        style={styles.sharedElement}>
+      <SharedElement id={`${category.id}.${category.categoryNameEN}`}>
         <Text style={styles.header} onPress={navigation.goBack}>
           {`${category.categoryNameTR} / ${category.categoryNameEN}`}
         </Text>
       </SharedElement>
-      <TouchableOpacity onPress={navigation.goBack} style={styles.backButton}>
-        <Image
-          source={require('../../Assets/Images/backImage.png')}
-          width={10}
-          height={10}
-          style={styles.img}
-        />
-      </TouchableOpacity>
+
       {disabled && (
         <View style={styles.overlay}>
           <Text style={styles.overlayContent}>{`🔊`} </Text>
@@ -93,16 +75,6 @@ const CategoryListScreen = ({navigation, route}: Props) => {
 export default CategoryListScreen;
 
 const styles = StyleSheet.create({
-  header: {
-    fontWeight: 'bold',
-    fontSize: 25,
-    letterSpacing: 1,
-    alignSelf: 'center',
-    color: '#000',
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    borderRadius: 10,
-    padding: 2,
-  },
   img: {
     width: '100%',
     height: '100%',
@@ -158,9 +130,20 @@ const styles = StyleSheet.create({
   backButton: {
     width: 35,
     height: 35,
-    position: 'absolute',
-    left: 10,
-    top: 0,
   },
-  sharedElement: {alignItems: 'center', justifyContent: 'center'},
+  header: {
+    fontWeight: 'bold',
+    fontSize: 25,
+    letterSpacing: 1,
+    color: '#000',
+    padding: 2,
+    alignSelf: 'center',
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    width: '100%',
+  },
 });

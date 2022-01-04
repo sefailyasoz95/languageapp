@@ -1,6 +1,6 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import CategoryList from '../../Components/Category/CategoryList';
 import useTts from '../../Hooks/useTts';
 import {AppStackParamList} from '../../StackParamLists/AppStackParamList';
@@ -17,9 +17,9 @@ const HomeScreen = ({navigation}: Props) => {
     navigation.navigate('CategoryList', {category: item});
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <CategoryList showCategoryItems={showCategoryItems} />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -27,9 +27,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 20,
   },
 });

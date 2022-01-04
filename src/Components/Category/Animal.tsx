@@ -65,7 +65,14 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: 'center',
     width: '75%',
-    elevation: 10,
+    elevation: 12,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
   },
   tren: {
     fontWeight: 'bold',

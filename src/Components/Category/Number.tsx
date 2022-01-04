@@ -28,7 +28,14 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     alignItems: 'center',
-    elevation: 10,
+    elevation: 12,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
     borderRadius: 12,
     margin: 5,
     justifyContent: 'center',
