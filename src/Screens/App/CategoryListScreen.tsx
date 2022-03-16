@@ -1,7 +1,14 @@
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {SharedElement} from 'react-navigation-shared-element';
 import Animal from '../../Components/Category/Animal';
 import Color from '../../Components/Category/Color';
@@ -20,7 +27,7 @@ const CategoryListScreen = ({navigation, route}: Props) => {
   const {speakTR, speakEN} = useTts();
   const {category} = route.params;
   const [dataSource, setDataSource] = useState<any[]>([]);
-  const [disabled, setDisabled] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<any | undefined>(undefined);
   useEffect(() => {
     if (category.categoryNameEN === 'Numbers') {
       setDataSource(numbers);
@@ -33,11 +40,20 @@ const CategoryListScreen = ({navigation, route}: Props) => {
     }
   }, []);
   const onPress = React.useCallback(async item => {
-    setDisabled(true);
+    if (category.categoryNameEN === 'Animals') {
+      let x = await item.url();
+      setDisabled(x.data.image);
+    } else if (category.categoryNameEN === 'Colors') {
+      setDisabled(item.value);
+    } else if (category.categoryNameEN === 'Numbers') {
+      setDisabled(item.value);
+    } else if (category.categoryNameEN === 'Objects') {
+      setDisabled(item.value);
+    }
     await speakTR(item.tr);
     await speakEN(item.en);
     setTimeout(() => {
-      setDisabled(false);
+      setDisabled(undefined);
     }, 3000);
   }, []);
   return (
@@ -50,7 +66,16 @@ const CategoryListScreen = ({navigation, route}: Props) => {
 
       {disabled && (
         <View style={styles.overlay}>
-          <Text style={styles.overlayContent}>{`🔊`} </Text>
+          {category.categoryNameEN === 'Animals' ? (
+            <Image
+              width={50}
+              height={50}
+              source={{uri: disabled}}
+              style={{width: '100%', height: undefined, aspectRatio: 1}}
+            />
+          ) : (
+            <Text style={styles.overlayContent}>{disabled}</Text>
+          )}
         </View>
       )}
       <ScrollView

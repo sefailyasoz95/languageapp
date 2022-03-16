@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {numbers} from '../Constants/data';
+import {IAnimal} from '../Constants/Types/Animal';
 
 export const getcat = async () => {
   let x: any;
@@ -9,13 +11,22 @@ export const getcat = async () => {
 };
 
 export const getdog = async () => {
-  let x: any;
-  await axios
-    .get('https://dog.ceo/api/breeds/image/random')
-    .then((res: any) => {
-      x = res.data?.message;
-    });
-  return x;
+  let id = Math.floor(Math.random() * (6 - 1) + 1);
+  try {
+    let result = await axios.get(
+      `https://6231097b05f5f4d40d724730.mockapi.io/api/v1/dogs/${id}`,
+    );
+
+    return {
+      status: result.status,
+      data: result.data,
+    };
+  } catch (error) {
+    return {
+      status: 400,
+      data: error,
+    };
+  }
 };
 
 export const getbunny = async () => {
@@ -63,22 +74,39 @@ export const getkoala = async () => {
 };
 
 export const getpanda = async () => {
-  let x: any;
-  await axios.get('https://some-random-api.ml/img/panda').then((res: any) => {
-    x = res.data?.link;
-  });
-  return x;
+  let id = Math.floor(Math.random() * (6 - 1) + 1);
+  try {
+    let result = await axios.get(
+      `https://6231097b05f5f4d40d724730.mockapi.io/api/v1/pandas/${id}`,
+    );
+
+    return {
+      status: result.status,
+      data: result.data,
+    };
+  } catch (error) {
+    return {
+      status: 400,
+      data: error,
+    };
+  }
 };
 
 export const getelephant = async () => {
-  let x: any;
-  await axios
-    .get('https://elephant-api.herokuapp.com/elephants/sex/male')
-    .then((res: any) => {
-      x = res.data[Math.floor(Math.random() * 25)];
-    });
+  let id = Math.floor(Math.random() * (6 - 1) + 1);
+  try {
+    let result = await axios.get(
+      `https://6231097b05f5f4d40d724730.mockapi.io/api/v1/elephant/${id}`,
+    );
 
-  return x.image.includes('missing') || x.image === undefined
-    ? 'https://listelist.com/wp-content/uploads/2017/05/210-600x375.jpg'
-    : x.image;
+    return {
+      status: result.status,
+      data: result.data,
+    };
+  } catch (error) {
+    return {
+      status: 400,
+      data: error,
+    };
+  }
 };

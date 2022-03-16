@@ -16,6 +16,7 @@ const HomeScreen = ({navigation}: Props) => {
     await speakEN(item.categoryNameEN);
     navigation.navigate('CategoryList', {category: item});
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <CategoryList showCategoryItems={showCategoryItems} />

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {IAnimal} from '../../Constants/Types/Animal';
 
 interface Props {
   item: any;
@@ -14,21 +15,24 @@ interface Props {
 }
 
 const Animal = React.memo(({item, onPress}: Props) => {
-  const [url, setUrl] = useState<string | undefined>(undefined);
+  const [fetchedAnimal, setFetchedAnimal] = useState<IAnimal | undefined>(
+    undefined,
+  );
   let handleImageData = async () => {
-    let x = await item.url();
-    setUrl(x);
+    let animal = await item.url();
+    if (animal.status === 200) {
+      setFetchedAnimal(animal.data);
+    }
   };
+
   useEffect(() => {
     handleImageData();
   }, []);
   return (
-    <TouchableOpacity
-      style={[styles.textContainer, {borderColor: item.value}]}
-      onPress={onPress}>
-      {url ? (
+    <TouchableOpacity style={styles.textContainer} onPress={onPress}>
+      {fetchedAnimal ? (
         <Image
-          source={{uri: url}}
+          source={{uri: fetchedAnimal?.image}}
           width={50}
           height={50}
           style={styles.image}
@@ -79,6 +83,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontStyle: 'italic',
     color: '#000',
+    textTransform: 'capitalize',
+    letterSpacing: 0.5,
   },
   trenContainer: {
     flexDirection: 'row',
