@@ -5,17 +5,16 @@ import CategoryListScreen from '../Screens/App/CategoryListScreen';
 import DetailScreen from '../Screens/App/DetailScreen';
 import HomeScreen from '../Screens/App/HomeScreen';
 
-interface Props {}
 const App = createSharedElementStackNavigator();
-const AppStack = (props: Props) => {
+const screenOptions = {
+  headerShown: false,
+  cardStyle: {
+    backgroundColor: '#999',
+  },
+};
+const AppStack = () => {
   return (
-    <App.Navigator
-      screenOptions={{
-        headerShown: false,
-        cardStyle: {
-          backgroundColor: '#999',
-        },
-      }}>
+    <App.Navigator screenOptions={screenOptions}>
       <App.Screen name="Home" component={HomeScreen} />
       <App.Screen name="Detail" component={DetailScreen} />
       <App.Screen

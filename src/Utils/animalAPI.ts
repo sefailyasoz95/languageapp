@@ -1,27 +1,35 @@
 import axios from 'axios';
-import {numbers} from '../Constants/data';
-import {IAnimal} from '../Constants/Types/Animal';
+import {ANIMAL_BY_NAME_URL, API_URL_ANIMAL} from '../Constants/api';
 
 export const getcat = async () => {
-  let x: any;
-  await axios.get('https://aws.random.cat/meow').then((res: any) => {
-    x = res.data?.file;
-  });
-  return x;
+  let i = Math.floor(Math.random() * 5);
+  try {
+    let result = await axios.get(ANIMAL_BY_NAME_URL + 'Cat');
+    return {
+      status: result.status,
+      data: result.data[i],
+    };
+  } catch (error) {
+    console.log('caat error: ', error);
+    return {
+      status: 400,
+      data: error,
+    };
+  }
 };
 
 export const getdog = async () => {
-  let id = Math.floor(Math.random() * (6 - 1) + 1);
+  let i = Math.floor(Math.random() * 5);
   try {
-    let result = await axios.get(
-      `https://6231097b05f5f4d40d724730.mockapi.io/api/v1/dogs/${id}`,
-    );
+    let result = await axios.get(ANIMAL_BY_NAME_URL + 'Dog');
+    console.log('getdog:', i);
 
     return {
       status: result.status,
-      data: result.data,
+      data: result.data[i],
     };
   } catch (error) {
+    console.log('getdog error: ', error);
     return {
       status: 400,
       data: error,
@@ -30,61 +38,92 @@ export const getdog = async () => {
 };
 
 export const getbunny = async () => {
-  let x: any;
-  await axios
-    .get('https://api.bunnies.io/v2/loop/random/?media=gif,png')
-    .then((res: any) => {
-      x = res.data?.media.poster;
-    });
-  return x;
-};
-
-export const getduck = async () => {
-  let x: any;
-  await axios
-    .get('https://random-d.uk/api/v1/random?type=png')
-    .then((res: any) => {
-      x = res.data?.url;
-    });
-  return x;
-};
-
-export const getfox = async () => {
-  let x: any;
-  await axios.get('https://randomfox.ca/floof/').then((res: any) => {
-    x = res.data?.image;
-  });
-  return x;
-};
-
-export const getshiba = async () => {
-  let x: any;
-  await axios.get('http://shibe.online/api/shibes').then((res: any) => {
-    x = res.data[0];
-  });
-  return x;
-};
-
-export const getkoala = async () => {
-  let x: any;
-  await axios.get('https://some-random-api.ml/img/koala').then((res: any) => {
-    x = res.data?.link;
-  });
-  return x;
-};
-
-export const getpanda = async () => {
-  let id = Math.floor(Math.random() * (6 - 1) + 1);
+  let i = Math.floor(Math.random() * 5);
   try {
-    let result = await axios.get(
-      `https://6231097b05f5f4d40d724730.mockapi.io/api/v1/pandas/${id}`,
-    );
+    let result = await axios.get(ANIMAL_BY_NAME_URL + 'Bunny');
 
     return {
       status: result.status,
-      data: result.data,
+      data: result.data[i],
     };
   } catch (error) {
+    console.log('bunny error: ', error);
+    return {
+      status: 400,
+      data: error,
+    };
+  }
+};
+
+export const getduck = async () => {
+  let i = Math.floor(Math.random() * 5);
+  try {
+    let result = await axios.get(ANIMAL_BY_NAME_URL + 'Duck');
+    console.log('getduck:', i);
+
+    return {
+      status: result.status,
+      data: result.data[i],
+    };
+  } catch (error) {
+    console.log('duck error: ', error);
+    return {
+      status: 400,
+      data: error,
+    };
+  }
+};
+
+export const getfox = async () => {
+  let i = Math.floor(Math.random() * 5);
+  try {
+    let result = await axios.get(`${API_URL_ANIMAL}fox`);
+    console.log('getfox:', i);
+
+    return {
+      status: result.status,
+      data: result.data[i],
+    };
+  } catch (error) {
+    console.log('fox error: ', error);
+    return {
+      status: 400,
+      data: error,
+    };
+  }
+};
+
+export const getkoala = async () => {
+  let i = Math.floor(Math.random() * 5);
+  try {
+    let result = await axios.get(`${API_URL_ANIMAL}koala`);
+    console.log('getkoala:', i);
+
+    return {
+      status: result.status,
+      data: result.data[i],
+    };
+  } catch (error) {
+    console.log('koala error: ', error);
+    return {
+      status: 400,
+      data: error,
+    };
+  }
+};
+
+export const getpanda = async () => {
+  let i = Math.floor(Math.random() * 5);
+  try {
+    let result = await axios.get(`${API_URL_ANIMAL}panda`);
+    console.log('getpanda:', i);
+
+    return {
+      status: result.status,
+      data: result.data[i],
+    };
+  } catch (error) {
+    console.log('panada error: ', error);
     return {
       status: 400,
       data: error,
@@ -93,17 +132,55 @@ export const getpanda = async () => {
 };
 
 export const getelephant = async () => {
-  let id = Math.floor(Math.random() * (6 - 1) + 1);
+  let i = Math.floor(Math.random() * 5);
   try {
-    let result = await axios.get(
-      `https://6231097b05f5f4d40d724730.mockapi.io/api/v1/elephant/${id}`,
-    );
+    let result = await axios.get(`${API_URL_ANIMAL}elephant`);
+    console.log('getelephant:', i);
 
     return {
       status: result.status,
-      data: result.data,
+      data: result.data[i],
     };
   } catch (error) {
+    console.log('elephant error: ', error);
+    return {
+      status: 400,
+      data: error,
+    };
+  }
+};
+
+export const getLion = async () => {
+  let i = Math.floor(Math.random() * 5);
+  try {
+    let result = await axios.get(`${API_URL_ANIMAL}lion`);
+    console.log('getLion:', i);
+
+    return {
+      status: result.status,
+      data: result.data[i],
+    };
+  } catch (error) {
+    console.log('lion error: ', error);
+    return {
+      status: 400,
+      data: error,
+    };
+  }
+};
+
+export const getMonkey = async () => {
+  let i = Math.floor(Math.random() * 5);
+  try {
+    let result = await axios.get(`${API_URL_ANIMAL}monkey`);
+    console.log('getMonkey:', i);
+
+    return {
+      status: result.status,
+      data: result.data[i],
+    };
+  } catch (error) {
+    console.log('monkey error: ', error);
     return {
       status: 400,
       data: error,

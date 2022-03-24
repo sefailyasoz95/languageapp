@@ -71,7 +71,7 @@ const CategoryListScreen = ({navigation, route}: Props) => {
               width={50}
               height={50}
               source={{uri: disabled}}
-              style={{width: '100%', height: undefined, aspectRatio: 1}}
+              style={styles.overlayImage}
             />
           ) : (
             <Text style={styles.overlayContent}>{disabled}</Text>
@@ -170,5 +170,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     width: '100%',
+  },
+  overlayImage: {
+    width: '98%',
+    height: undefined,
+    aspectRatio: 1,
+    borderRadius: 10,
+    alignSelf: 'center',
   },
 });
