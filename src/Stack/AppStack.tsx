@@ -1,54 +1,54 @@
 import React from 'react';
 import {Easing} from 'react-native';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
+import COLORS from '../Constants/COLORS';
 import CategoryListScreen from '../Screens/App/CategoryListScreen';
 import DetailScreen from '../Screens/App/DetailScreen';
 import HomeScreen from '../Screens/App/HomeScreen';
 
-interface Props {}
 const App = createSharedElementStackNavigator();
-const AppStack = (props: Props) => {
+const screenOptions = {
+  headerShown: false,
+  cardStyle: {
+    backgroundColor: COLORS.background,
+  },
+};
+const AppStack = () => {
   return (
-    <App.Navigator
-      screenOptions={{
-        headerShown: false,
-        cardStyle: {
-          backgroundColor: '#999',
-        },
-      }}>
+    <App.Navigator screenOptions={screenOptions}>
       <App.Screen name="Home" component={HomeScreen} />
       <App.Screen name="Detail" component={DetailScreen} />
       <App.Screen
         name="CategoryList"
         component={CategoryListScreen}
-        options={{
-          gestureEnabled: false,
-          cardStyleInterpolator: ({current: {progress}}) => {
-            return {
-              cardStyle: {
-                opacity: progress,
-              },
-            };
-          },
-          transitionSpec: {
-            open: {
-              animation: 'timing',
-              config: {duration: 300, easing: Easing.ease},
-            },
-            close: {
-              animation: 'timing',
-              config: {duration: 300, easing: Easing.ease},
-            },
-          },
-        }}
-        sharedElements={route => {
-          const {category} = route.params;
-          return [
-            {
-              id: `${category.id}.${category.categoryNameEN}`,
-            },
-          ];
-        }}
+        // options={{
+        //   gestureEnabled: false,
+        //   cardStyleInterpolator: ({current: {progress}}) => {
+        //     return {
+        //       cardStyle: {
+        //         opacity: progress,
+        //       },
+        //     };
+        //   },
+        //   transitionSpec: {
+        //     open: {
+        //       animation: 'timing',
+        //       config: {duration: 300, easing: Easing.ease},
+        //     },
+        //     close: {
+        //       animation: 'timing',
+        //       config: {duration: 300, easing: Easing.ease},
+        //     },
+        //   },
+        // }}
+        // sharedElements={route => {
+        //   const {category} = route.params;
+        //   return [
+        //     {
+        //       id: `${category.id}.${category.categoryNameEN}`,
+        //     },
+        //   ];
+        // }}
       />
     </App.Navigator>
   );

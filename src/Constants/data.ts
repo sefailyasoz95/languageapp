@@ -6,6 +6,8 @@ import {
   getelephant,
   getfox,
   getkoala,
+  getLion,
+  getMonkey,
   getpanda,
 } from '../Utils/animalAPI';
 
@@ -121,6 +123,8 @@ export const animals = [
   {value: 'fox', tr: 'tilki', en: 'fox', url: getfox},
   {value: 'koala', tr: 'koala', en: 'koala', url: getkoala},
   {value: 'panda', tr: 'panda', en: 'panda', url: getpanda},
+  {value: 'lion', tr: 'aslan', en: 'lion', url: getLion},
+  {value: 'monkey', tr: 'maymun', en: 'monkey', url: getMonkey},
 ];
 export const colors = [
   {value: 'red', tr: 'kırmızı', en: 'red'},

@@ -51,6 +51,9 @@ const Button: React.FC<Props> = ({
         variantHelper(variant, color),
         cornerHelper(corners),
         buttonStyle,
+        {
+          opacity: disabled ? 0.5 : 1,
+        },
       ]}
       onPress={() => !disabled && onPress()}>
       {!loading ? (

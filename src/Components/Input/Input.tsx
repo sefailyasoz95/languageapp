@@ -8,6 +8,7 @@ import {
   Easing,
   StyleProp,
   ViewStyle,
+  TextStyle,
 } from 'react-native';
 import {
   inputContainerStyleHelper,
@@ -24,25 +25,33 @@ type Props = {
   type?: 'input' | 'textarea';
   onTextChanged: Function;
   style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   testID?: string;
   clearTextOnFocus?: boolean;
   selectTextOnFocus?: boolean;
   ref?: React.RefObject<TextInput>;
+  name?: string;
+  placeholderColor?: string;
+  secureTextEntry?: boolean;
 };
 
 const Input: React.FC<Props> = ({
   placeholder,
-  keyboardType = 'default',
+  keyboardType,
   autoFocus = false,
   hasError = false,
   required = false,
   corner = 'curved',
   type = 'input',
   onTextChanged,
+  secureTextEntry,
   testID,
   clearTextOnFocus,
   selectTextOnFocus,
   style,
+  name,
+  textStyle,
+  placeholderColor,
 }) => {
   const [inputError, setInputError] = useState(false);
   const placeholderRef = useRef(
@@ -68,7 +77,7 @@ const Input: React.FC<Props> = ({
           }).start();
     } else {
       setInputError(false);
-      onTextChanged(text);
+      onTextChanged(text, name);
     }
   };
   return (
@@ -84,17 +93,18 @@ const Input: React.FC<Props> = ({
         style={[
           styles.placeholder,
           {transform: [{translateY: placeholderRef}]},
-          {color: 'white'},
+          {color: placeholderColor},
         ]}>
         {placeholder}
       </Animated.Text>
       <TextInput
         ref={inputRef}
         testID={testID || 'textinput'}
-        style={[styles.input, inputStyleHelper(type), {color: 'white'}]}
+        style={[styles.input, inputStyleHelper(type), textStyle]}
         keyboardType={keyboardType}
         clearTextOnFocus={clearTextOnFocus}
         selectTextOnFocus={selectTextOnFocus}
+        secureTextEntry={secureTextEntry}
         multiline={type === 'textarea' && true}
         onEndEditing={e => {
           handleInputValue(e.nativeEvent.text);
