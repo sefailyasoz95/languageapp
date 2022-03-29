@@ -1,99 +1,127 @@
-import {Image, Keyboard, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import {Easing, StyleSheet, Animated, Text, Platform} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
 import Input from '../../Components/Input/Input';
 import Button from '../../Components/Button/Button';
+import {heightPercentage, height} from '../../Helpers/helpers';
+import {login} from '../../Redux/actions/authActions';
+import {useAppDispatch, useAppSelector} from '../../Redux/store/store';
+import COLORS from '../../Constants/COLORS';
 
-type Props = {};
+type Props = {
+  onClose: () => void;
+};
 
-const LoginScreen = (props: Props) => {
+const LoginScreen = ({onClose}: Props) => {
   const [formData, setFormData] = useState({email: '', password: ''});
+  const dispatch = useAppDispatch();
+  const {isFetchingUser} = useAppSelector(state => state.global);
+
   const handleFormData = (value: string, name: string) => {
     setFormData(prevState => ({
       ...prevState,
       [name]: value,
     }));
   };
+  const opacityLogin = useRef(new Animated.Value(0)).current;
+  const loginForm = useRef(new Animated.Value(400)).current;
+  const handleLogin = () => {
+    console.log('formData: ', formData);
+
+    dispatch(login(formData));
+  };
+  useEffect(() => {
+    Animated.timing(loginForm, {
+      useNativeDriver: true,
+      toValue: 1,
+      easing: Easing.inOut(Easing.ease),
+      duration: 500,
+    }).start();
+    Animated.timing(opacityLogin, {
+      useNativeDriver: true,
+      toValue: 1,
+      easing: Easing.inOut(Easing.ease),
+      duration: 500,
+    }).start();
+  }, []);
+  const closeAnimation = () => {
+    Animated.timing(loginForm, {
+      useNativeDriver: true,
+      toValue: 400,
+      easing: Easing.inOut(Easing.ease),
+      duration: 500,
+    }).start();
+    Animated.timing(opacityLogin, {
+      useNativeDriver: true,
+      toValue: 0,
+      easing: Easing.inOut(Easing.ease),
+      duration: 500,
+    }).start();
+    setTimeout(() => {
+      onClose();
+    }, 550);
+  };
   return (
-    <View style={styles.container} onTouchStart={Keyboard.dismiss}>
-      <View style={styles.header}>
-        <Image
-          width={150}
-          height={150}
-          source={require('../../Assets/Images/standing-person.png')}
-          style={styles.image}
-        />
-        <View style={styles.headerTextGroup}>
-          <Text style={styles.headerText}>Oku, gör, dinle, tekrarla</Text>
-          <Text style={styles.headerText}>Oyunlarla pekiştir ve öğren!</Text>
-        </View>
-      </View>
-      <View style={styles.form}>
-        <Text style={styles.formText}>Hoş Geldin!</Text>
-        <Input
-          placeholder="Email"
-          corner="rounded"
-          name="email"
-          onTextChanged={handleFormData}
-          style={styles.input}
-          textStyle={styles.inputText}
-          placeholderColor={'#999'}
-        />
-        <Input
-          placeholder="Şifre"
-          corner="rounded"
-          name="password"
-          onTextChanged={handleFormData}
-          style={styles.input}
-          placeholderColor={'#999'}
-          textStyle={styles.inputText}
-          secureTextEntry={true}
-          keyboardType="email-address"
-        />
-        <Button
-          key={'login'}
-          variant="outlined"
-          onPress={() => {}}
-          text="Giriş Yap"
-          color="#ccc"
-          corners="curved"
-          size="medium"
-          buttonStyle={styles.button}
-        />
-        <Button
-          key={'register'}
-          variant="filled"
-          onPress={() => {}}
-          text="Kayıt Ol"
-          color="#aaa"
-          corners="curved"
-          size="medium"
-          textColor="black"
-          buttonStyle={styles.button}
-        />
-      </View>
-    </View>
+    <Animated.View
+      style={[
+        styles.form,
+        {opacity: opacityLogin, transform: [{translateY: loginForm}]},
+      ]}>
+      <Text style={styles.closeIcon} onPress={closeAnimation}>
+        ▼
+      </Text>
+      <Input
+        placeholder="Email"
+        corner="rounded"
+        name="email"
+        onTextChanged={handleFormData}
+        style={styles.input}
+        keyboardType="email-address"
+        textStyle={styles.inputText}
+        placeholderColor={COLORS.light}
+      />
+      <Input
+        placeholder="Şifre"
+        corner="rounded"
+        name="password"
+        onTextChanged={handleFormData}
+        style={styles.input}
+        placeholderColor={COLORS.light}
+        textStyle={styles.inputText}
+        secureTextEntry={true}
+      />
+      <Button
+        key={'login'}
+        variant="outlined"
+        onPress={handleLogin}
+        text="Giriş Yap"
+        color={COLORS.light}
+        corners="curved"
+        size="medium"
+        loading={isFetchingUser}
+        buttonStyle={styles.button}
+      />
+    </Animated.View>
   );
 };
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    flexDirection: 'column',
-  },
   form: {
     width: '100%',
     alignSelf: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    height: '50%',
+    height:
+      height < 550
+        ? heightPercentage(45)
+        : height < 670
+        ? heightPercentage(37)
+        : heightPercentage(30),
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    backgroundColor: '#020202',
-    marginBottom: '-30%',
+    backgroundColor: COLORS.secondary,
+    borderColor: COLORS.secondary,
     shadowColor: 'black',
     shadowOffset: {
       width: 0,
@@ -101,50 +129,28 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 15,
-  },
-  image: {
-    transform: [{scale: 1.2}],
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 1,
-      height: 0,
-    },
-    shadowOpacity: 0.7,
-    shadowRadius: 2,
+    elevation: 20,
+    position: 'absolute',
+    bottom: 0,
   },
   input: {
-    borderColor: '#ccc',
+    borderColor: COLORS.light,
     borderWidth: 2,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 20,
     zIndex: 5,
   },
   inputText: {
-    color: 'white',
+    color: COLORS.light,
     letterSpacing: 1,
   },
-  formText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 20,
-    marginVertical: 15,
-    letterSpacing: 1.2,
-  },
   button: {
-    marginTop: 10,
+    marginTop: 20,
     borderWidth: 2,
   },
-  header: {
-    alignItems: 'center',
-  },
-  headerText: {
-    color: 'black',
-    fontWeight: 'bold',
+  closeIcon: {
+    color: COLORS.light,
     fontSize: 24,
-    letterSpacing: 1.2,
-    marginVertical: 3,
-  },
-  headerTextGroup: {
-    top: 35,
+    alignSelf: 'center',
+    fontWeight: 'bold',
   },
 });

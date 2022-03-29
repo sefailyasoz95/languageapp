@@ -9,13 +9,11 @@ import AuthStack from './src/Stack/AuthStack';
 import SplashScreen from 'react-native-splash-screen';
 
 const Main = () => {
-  const {user, isFetchingUser, isAuthenticated} = useAppSelector(
-    state => state.global,
-  );
+  const {isAuthenticated} = useAppSelector(state => state.global);
   const dispatch = useAppDispatch();
   const getUser = async () => {
-    let response = await AsyncStorage.getItem('user');
-    dispatch(setUser(response));
+    let user = await AsyncStorage.getItem('user');
+    dispatch(setUser({user: user ? JSON.parse(user) : null}));
   };
   useEffect(() => {
     getUser();

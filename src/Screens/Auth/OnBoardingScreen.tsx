@@ -6,6 +6,7 @@ import LottieView from 'lottie-react-native';
 import Button from '../../Components/Button/Button';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {AuthStackParamList} from '../../StackParamLists/AuthStackParamList';
+import COLORS from '../../Constants/COLORS';
 
 const OnBoardingData = [
   {
@@ -70,12 +71,14 @@ const OnBoardingScreen = ({navigation}: Props) => {
       <Button
         text={'Hadi Başlayalım !'}
         onPress={() => {
-          navigation.navigate('LoginScreen');
+          navigation.navigate('AuthScreen');
         }}
         buttonStyle={styles.button}
         corners="curved"
         size="large"
+        color={COLORS.text}
         disabled={!(activeSlide === OnBoardingData.length - 1)}
+        textStyle={styles.buttonText}
       />
     </View>
   );
@@ -98,14 +101,10 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: '#ff2222',
+    backgroundColor: COLORS.secondary,
   },
   inactiveDots: {
-    backgroundColor: 'black',
-  },
-  carouselContainer: {
-    borderWidth: 10,
-    borderColor: 'black',
+    backgroundColor: COLORS.primary,
   },
   animationItem: {
     marginBottom: 50,
@@ -116,8 +115,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold',
     fontSize: 20,
+    color: COLORS.text,
   },
   button: {
     marginBottom: heightPercentage(5),
+    borderWidth: 2,
+  },
+  buttonText: {
+    fontWeight: 'bold',
   },
 });

@@ -1,11 +1,11 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {GetSomeDataAsync} from '../services/services';
-
-export const getSomeData = createAsyncThunk(
-  'core/getSomeData',
-  async (data, thunkAPI) => {
+import {GetAnimalsAsync} from '../services/animalServices';
+export const getAllAnimals = createAsyncThunk(
+  'animals/getAll',
+  async (_, thunkAPI) => {
     try {
-      return await GetSomeDataAsync(data);
+      const token = thunkAPI.getState().global.user.token;
+      return await GetAnimalsAsync(token);
     } catch (error: any) {
       const message =
         (error.response &&

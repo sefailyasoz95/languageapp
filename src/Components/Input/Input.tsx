@@ -37,7 +37,7 @@ type Props = {
 
 const Input: React.FC<Props> = ({
   placeholder,
-  keyboardType = 'default',
+  keyboardType,
   autoFocus = false,
   hasError = false,
   required = false,

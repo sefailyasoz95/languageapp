@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {getSomeData} from '../actions/actions';
-import {User} from '../../Models/User';
+import {login, register} from '../actions/authActions';
+import {getAllCategories} from '../actions/categoryActions';
 const initialState = {
   categories: [],
   isFetchingCategories: true,
@@ -14,7 +14,7 @@ const initialState = {
   message: '',
   isAuthenticated: false,
   user: null,
-  isFetchingUser: true,
+  isFetchingUser: false,
 };
 
 export const reducer = createSlice({
@@ -36,21 +36,47 @@ export const reducer = createSlice({
     },
   },
   extraReducers: builder => {
-    // builder
-    //   .addCase(getSomeData.pending, (state, action) => {
-    //     state.isLoading = true;
-    //   })
-    //   .addCase(
-    //     getSomeData.fulfilled,
-    //     (state, action: PayloadAction<boolean>) => {
-    //       state.isLoading = false;
-    //       state.isAuthenticated = action.payload;
-    //     },
-    //   )
-    //   .addCase(getSomeData.rejected, (state, action) => {
-    //     state.isLoading = false;
-    //     state.isError = true;
-    //   });
+    builder
+      .addCase(login.pending, state => {
+        state.isFetchingUser = true;
+      })
+      .addCase(login.fulfilled, (state, action: any) => {
+        state.isAuthenticated = true;
+        state.user = action.payload.user;
+        state.isFetchingUser = false;
+        AsyncStorage.setItem('user', JSON.stringify(action.payload.user));
+      })
+      .addCase(login.rejected, (state, action: any) => {
+        state.isFetchingUser = false;
+        state.error = true;
+        state.message = action.payload.message;
+      })
+      .addCase(register.pending, state => {
+        state.isFetchingUser = true;
+      })
+      .addCase(register.fulfilled, (state, action: any) => {
+        state.isAuthenticated = true;
+        state.user = action.payload;
+        state.isFetchingUser = false;
+        AsyncStorage.setItem('user', JSON.stringify(action.payload.user));
+      })
+      .addCase(register.rejected, (state, action: any) => {
+        state.isFetchingUser = false;
+        state.error = true;
+        state.message = action.payload.message;
+      })
+      .addCase(getAllCategories.pending, state => {
+        state.isFetchingCategories = true;
+      })
+      .addCase(getAllCategories.fulfilled, (state, action: any) => {
+        state.categories = action.payload.categories;
+        state.isFetchingCategories = false;
+      })
+      .addCase(getAllCategories.rejected, (state, action: any) => {
+        state.message = action.payload.message;
+        state.error = true;
+        state.isFetchingCategories = false;
+      });
   },
 });
 

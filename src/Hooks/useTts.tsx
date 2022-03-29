@@ -22,8 +22,8 @@ const useTts = () => {
         if (err) {
           console.log('err: ', err);
 
-          Tts.requestInstallEngine();
-          Tts.requestInstallData();
+          // Tts.requestInstallEngine();
+          // Tts.requestInstallData();
         }
       },
     );
