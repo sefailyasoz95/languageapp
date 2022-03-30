@@ -50,6 +50,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<key>NSMicrophoneUsageDescription</key>
+  	<string>Sesli arama yapabilmek için uygulamanın mikrofona erişmesi gerekiyor.</string>
+  	<key>NSSpeechRecognitionUsageDescription</key>
+  	<string>Aranan kelimeyi anlayabilmesi için uygulamanın ses tanıma özelliğine erişmesi gerekiyor.</string>
 	<false/>
 </dict>
 </plist>

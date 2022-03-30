@@ -1,35 +1,38 @@
 import axios from 'axios';
-import {ANIMAL_BY_NAME_URL, API_URL_ANIMAL} from '../Constants/api';
+import {ANIMAL_BY_NAME_URL} from '../Constants/api';
 
-export const getcat = async () => {
+export const getCat = async () => {
   let i = Math.floor(Math.random() * 5);
-  try {
-    let result = await axios.get(ANIMAL_BY_NAME_URL + 'Cat');
-    return {
-      status: result.status,
-      data: result.data[i],
-    };
-  } catch (error) {
-    console.log('caat error: ', error);
-    return {
-      status: 400,
-      data: error,
-    };
-  }
+  let result = await axios.get(ANIMAL_BY_NAME_URL + 'Cat');
+  console.log('result: ', result.data);
+
+  return {
+    status: result.status,
+    data: result.data[i],
+  };
+  // try {
+
+  // } catch (error) {
+  //   console.log('cat error: ', error);
+  //   return {
+  //     status: 400,
+  //     data: error,
+  //   };
+  // }
 };
 
-export const getdog = async () => {
+export const getDog = async () => {
   let i = Math.floor(Math.random() * 5);
   try {
     let result = await axios.get(ANIMAL_BY_NAME_URL + 'Dog');
-    console.log('getdog:', i);
+    console.log('get Dog:', i);
 
     return {
       status: result.status,
       data: result.data[i],
     };
   } catch (error) {
-    console.log('getdog error: ', error);
+    console.log('get dog error: ', error);
     return {
       status: 400,
       data: error,
@@ -37,7 +40,7 @@ export const getdog = async () => {
   }
 };
 
-export const getbunny = async () => {
+export const getBunny = async () => {
   let i = Math.floor(Math.random() * 5);
   try {
     let result = await axios.get(ANIMAL_BY_NAME_URL + 'Bunny');
@@ -55,11 +58,11 @@ export const getbunny = async () => {
   }
 };
 
-export const getduck = async () => {
+export const getDuck = async () => {
   let i = Math.floor(Math.random() * 5);
   try {
     let result = await axios.get(ANIMAL_BY_NAME_URL + 'Duck');
-    console.log('getduck:', i);
+    console.log('get duck:', i);
 
     return {
       status: result.status,
@@ -74,11 +77,11 @@ export const getduck = async () => {
   }
 };
 
-export const getfox = async () => {
+export const getFox = async () => {
   let i = Math.floor(Math.random() * 5);
   try {
-    let result = await axios.get(`${API_URL_ANIMAL}fox`);
-    console.log('getfox:', i);
+    let result = await axios.get(ANIMAL_BY_NAME_URL + 'Fox');
+    console.log('get fox:', i);
 
     return {
       status: result.status,
@@ -93,11 +96,11 @@ export const getfox = async () => {
   }
 };
 
-export const getkoala = async () => {
+export const getKoala = async () => {
   let i = Math.floor(Math.random() * 5);
   try {
-    let result = await axios.get(`${API_URL_ANIMAL}koala`);
-    console.log('getkoala:', i);
+    let result = await axios.get(`${ANIMAL_BY_NAME_URL}Koala`);
+    console.log('get koala:', i);
 
     return {
       status: result.status,
@@ -112,11 +115,11 @@ export const getkoala = async () => {
   }
 };
 
-export const getpanda = async () => {
+export const getPanda = async () => {
   let i = Math.floor(Math.random() * 5);
   try {
-    let result = await axios.get(`${API_URL_ANIMAL}panda`);
-    console.log('getpanda:', i);
+    let result = await axios.get(`${ANIMAL_BY_NAME_URL}Panda`);
+    console.log('get panda:', i);
 
     return {
       status: result.status,
@@ -131,11 +134,11 @@ export const getpanda = async () => {
   }
 };
 
-export const getelephant = async () => {
+export const getElephant = async () => {
   let i = Math.floor(Math.random() * 5);
   try {
-    let result = await axios.get(`${API_URL_ANIMAL}elephant`);
-    console.log('getelephant:', i);
+    let result = await axios.get(`${ANIMAL_BY_NAME_URL}Elephant`);
+    console.log('get elephant:', i);
 
     return {
       status: result.status,
@@ -153,7 +156,7 @@ export const getelephant = async () => {
 export const getLion = async () => {
   let i = Math.floor(Math.random() * 5);
   try {
-    let result = await axios.get(`${API_URL_ANIMAL}lion`);
+    let result = await axios.get(`${ANIMAL_BY_NAME_URL}Lion`);
     console.log('getLion:', i);
 
     return {
@@ -172,7 +175,7 @@ export const getLion = async () => {
 export const getMonkey = async () => {
   let i = Math.floor(Math.random() * 5);
   try {
-    let result = await axios.get(`${API_URL_ANIMAL}monkey`);
+    let result = await axios.get(`${ANIMAL_BY_NAME_URL}Monkey`);
     console.log('getMonkey:', i);
 
     return {

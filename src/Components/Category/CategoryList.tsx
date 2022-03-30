@@ -1,9 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  ActivityIndicator,
+  Animated,
   Dimensions,
-  FlatList,
+  Easing,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
@@ -12,6 +13,7 @@ import {heightPercentage, widthPercentage} from '../../Helpers/helpers';
 import {getAllCategories} from '../../Redux/actions/categoryActions';
 import {useAppDispatch, useAppSelector} from '../../Redux/store/store';
 import CategoryItem from './CategoryItem';
+import Loading from '../Loading/Loading';
 
 type Props = {
   showCategoryItems(params: any): void;
@@ -22,13 +24,29 @@ const CategoryList = ({showCategoryItems}: Props) => {
     state => state.global,
   );
   const carouselRef = useRef(null);
+  const opacity = useRef(new Animated.Value(0)).current;
+  const scale = useRef(new Animated.Value(0)).current;
   const [activeSlide, setActiveSlide] = useState(0);
   const {width} = Dimensions.get('window');
   const nextSlide = (index: number) => setActiveSlide(index);
   const dispatch = useAppDispatch();
   useEffect(() => {
     categories.length < 1 && dispatch(getAllCategories());
-  }, []);
+    if (categories.length > 1) {
+      Animated.timing(opacity, {
+        useNativeDriver: true,
+        duration: 500,
+        toValue: 1,
+        easing: Easing.ease,
+      }).start();
+      Animated.timing(scale, {
+        useNativeDriver: true,
+        duration: 500,
+        toValue: 1,
+        easing: Easing.bounce,
+      }).start();
+    }
+  }, [isFetchingCategories]);
   const renderItem = ({item, index}: any) => {
     return (
       <CategoryItem
@@ -39,11 +57,9 @@ const CategoryList = ({showCategoryItems}: Props) => {
     );
   };
   return isFetchingCategories ? (
-    <View style={styles.loading}>
-      <ActivityIndicator color={COLORS.text} size={widthPercentage(30)} />
-    </View>
+    <Loading />
   ) : (
-    <>
+    <Animated.View style={{flex: 1, opacity, transform: [{scale}]}}>
       <Carousel
         ref={carouselRef}
         sliderWidth={width}
@@ -62,7 +78,7 @@ const CategoryList = ({showCategoryItems}: Props) => {
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
       />
-    </>
+    </Animated.View>
   );
 };
 
@@ -137,5 +153,10 @@ const styles = StyleSheet.create({
     width: '100%',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
+  },
+  animationItem: {
+    alignSelf: 'center',
+    width: 100,
+    height: 100,
   },
 });

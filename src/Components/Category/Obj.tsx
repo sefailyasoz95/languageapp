@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {widthPercentage} from '../../Helpers/helpers';
 import {getObject} from '../../Utils/objectAPI';
 
 interface Props {
@@ -15,25 +16,13 @@ interface Props {
 }
 
 const Obj = React.memo(({item, onPress}: Props) => {
-  const [url, setUrl] = useState<string | undefined>(
-    'https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MnwxfDB8MXxyYW5kb218MHx8c29mYXx8fHx8fDE2NDEyOTIxMTU&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=500',
-  );
-  // let handleImageData = async () => {
-  //   let res = await getObject(item.en);
-  //   setUrl(res);
-  // };
-  // useEffect(() => {
-  //   handleImageData();
-  // }, []);
   return (
     <TouchableOpacity
       style={[styles.textContainer, {borderColor: item.value}]}
       onPress={onPress}>
-      {url ? (
+      {item ? (
         <Image
-          source={{
-            uri: url,
-          }}
+          source={{uri: item.image}}
           width={50}
           height={50}
           style={styles.image}
@@ -47,9 +36,9 @@ const Obj = React.memo(({item, onPress}: Props) => {
           />
         </View>
       )}
-      <View style={[styles.trenContainer]}>
-        <Text style={[styles.tren]}>{`${item.tr} / `}</Text>
-        <Text style={[styles.tren]}>{item.en}</Text>
+      <View style={[styles.trEnContainer]}>
+        <Text style={[styles.trEn]}>{`${item.tr} / `}</Text>
+        <Text style={[styles.trEn]}>{item.en}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -61,7 +50,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'transparent',
   },
   textContainer: {
     alignItems: 'center',
@@ -69,8 +58,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     margin: 5,
     justifyContent: 'center',
-    width: '75%',
     elevation: 12,
+    width: widthPercentage(75),
     shadowColor: '#000',
     shadowOffset: {
       width: 1,
@@ -78,24 +67,27 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 5,
+    alignSelf: 'center',
   },
-  tren: {
+  trEn: {
     fontWeight: 'bold',
     fontSize: 25,
     fontStyle: 'italic',
     color: '#000',
+    textTransform: 'capitalize',
+    letterSpacing: 0.5,
   },
-  trenContainer: {
+  trEnContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
     height: 50,
+    alignSelf: 'center',
   },
   image: {
     width: '100%',
     height: undefined,
-    aspectRatio: 1,
+    aspectRatio: 1.4,
     borderRadius: 10,
   },
   activity: {

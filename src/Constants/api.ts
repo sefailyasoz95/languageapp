@@ -10,3 +10,9 @@ export const CATEGORY_BY_NAME_URL =
   'https://mernlanguageapp.herokuapp.com/api/categories/getCategoriesByName?name=';
 
 export const API_URL_USER = 'https://mernlanguageapp.herokuapp.com/api/users';
+
+export const API_URL_OBJECTS =
+  'https://mernlanguageapp.herokuapp.com/api/objects';
+
+export const OBJECT_BY_NAME_URL =
+  'https://mernlanguageapp.herokuapp.com/api/objects/getObjectsByName?name=';
