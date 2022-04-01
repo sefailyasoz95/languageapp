@@ -7,12 +7,10 @@ const useSpeechToText = () => {
   const [results, setResults] = useState(null);
   const [isSpeechRecognitionSupported, setIsSpeechRecognitionSupported] =
     useState(true);
-  const checkIfRecognizing = async () => {
-    let result = await Voice.isRecognizing();
-    result !== isRecognizing && setIsRecognizing(result);
-  };
+
   const onSpeechStart = async (e: any) => {
-    await checkIfRecognizing();
+    // await checkIfRecognizing('onSpeechStart');
+    setIsRecognizing(1);
   };
   const onSpeechError = (e: any) => {
     console.log('onSpeechError: ', e);
@@ -20,16 +18,20 @@ const useSpeechToText = () => {
   };
   const onSpeechResults = async (e: any) => {
     let x = e.value;
+    console.log('x: ', x);
+    // 203/The operation couldn’t be completed. (kAFAssistantErrorDomain error 203. bak buna
     setResults(x[0]);
     if (!isRecognizing) {
-      checkIfRecognizing();
-      stopRecognizing();
+      // await checkIfRecognizing('onSpeechResults');
+      setTimeout(async () => {
+        await stopRecognizing();
+        setIsRecognizing(0);
+      }, 500);
     }
   };
 
   const onSpeechRecognized = (e: any) => {
     console.log('onSpeechRecognized: ', e);
-    checkIfRecognizing();
   };
 
   const startRecognizing = async () => {
@@ -46,7 +48,6 @@ const useSpeechToText = () => {
     //Stops listening for speech
     try {
       await Voice.stop();
-      await checkIfRecognizing();
     } catch (e) {
       console.error(e);
     }

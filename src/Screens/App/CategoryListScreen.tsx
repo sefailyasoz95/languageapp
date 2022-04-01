@@ -44,6 +44,8 @@ const CategoryListScreen = ({navigation, route}: Props) => {
     startRecognizing,
     results,
   } = useSpeechToText();
+  console.log('isRecognizing: ', isRecognizing);
+
   useEffect(() => {
     if (category.en === 'Numbers') {
       setDataSource(numbers);
@@ -84,7 +86,7 @@ const CategoryListScreen = ({navigation, route}: Props) => {
     } else if (category.en === 'Numbers') {
       filtered = numbers.filter(data => {
         return (
-          data.value === filterValue ||
+          data.value == filterValue ||
           data.tr === filterValue.toString().toLowerCase()
         );
       });
