@@ -13,7 +13,7 @@ const useSpeechToText = () => {
     setIsRecognizing(1);
   };
   const onSpeechError = (e: any) => {
-    console.log('onSpeechError: ', e);
+    console.log('onSpeechError:', e);
     // setError(JSON.stringify(e.error));
   };
   const onSpeechResults = async (e: any) => {
