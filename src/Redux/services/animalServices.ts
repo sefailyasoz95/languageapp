@@ -12,7 +12,6 @@ export const GetAnimalsAsync = async (token: string) => {
       Authorization: 'Bearer ' + token,
     },
   });
-  console.log('GetAnimalsAsync response: ', response.data);
   return response.data;
 };
 
@@ -25,6 +24,5 @@ export const GetAnimalByNameAsync = async (
       Authorization: 'Bearer ' + token,
     },
   });
-  console.log('GetAnimalByNameAsync response: ', response.data);
   return response.data;
 };

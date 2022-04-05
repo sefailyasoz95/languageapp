@@ -1,5 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import COLORS from '../../Constants/COLORS';
+import {widthPercentage} from '../../Helpers/helpers';
 
 interface Props {
   item: any;
@@ -10,9 +12,9 @@ const Number = React.memo(({item, onPress}: Props) => {
   return (
     <TouchableOpacity style={styles.textContainer} onPress={onPress}>
       <Text style={styles.text}>{item.value}</Text>
-      <View style={styles.trenContainer}>
-        <Text style={styles.tren}>{`${item.tr} / `}</Text>
-        <Text style={styles.tren}>{item.en}</Text>
+      <View style={styles.trEnContainer}>
+        <Text style={styles.trEn}>{`${item.tr} / `}</Text>
+        <Text style={styles.trEn}>{item.en}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -24,12 +26,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'black',
+    color: COLORS.light,
   },
   textContainer: {
     alignItems: 'center',
     elevation: 12,
-    shadowColor: '#000',
+    shadowColor: COLORS.black,
     shadowOffset: {
       width: 1,
       height: 1,
@@ -40,16 +42,16 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: 'center',
     padding: 5,
-    width: '46%',
-    backgroundColor: '#bbb',
+    backgroundColor: COLORS.secondary,
+    width: widthPercentage(45),
   },
-  tren: {
+  trEn: {
     fontStyle: 'italic',
     fontWeight: 'bold',
-    color: 'black',
     fontSize: 12,
+    color: COLORS.light,
   },
-  trenContainer: {
+  trEnContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -1,14 +1,14 @@
 import {
-  getbunny,
-  getcat,
-  getdog,
-  getduck,
-  getelephant,
-  getfox,
-  getkoala,
+  getBunny,
+  getCat,
+  getDog,
+  getDuck,
+  getElephant,
+  getFox,
+  getKoala,
   getLion,
   getMonkey,
-  getpanda,
+  getPanda,
 } from '../Utils/animalAPI';
 
 export const numbers = [
@@ -115,14 +115,14 @@ export const numbers = [
   {value: 100, tr: 'yüz', en: 'one hundred'},
 ];
 export const animals = [
-  {value: 'elephant', tr: 'fil', en: 'elephant', url: getelephant},
-  {value: 'dog', tr: 'köpek', en: 'dog', url: getdog},
-  {value: 'cat', tr: 'kedi', en: 'cat', url: getcat},
-  {value: 'bunny', tr: 'tavşan', en: 'bunny', url: getbunny},
-  {value: 'duck', tr: 'ördek', en: 'duck', url: getduck},
-  {value: 'fox', tr: 'tilki', en: 'fox', url: getfox},
-  {value: 'koala', tr: 'koala', en: 'koala', url: getkoala},
-  {value: 'panda', tr: 'panda', en: 'panda', url: getpanda},
+  {value: 'elephant', tr: 'fil', en: 'elephant', url: getElephant},
+  {value: 'dog', tr: 'köpek', en: 'dog', url: getDog},
+  {value: 'cat', tr: 'kedi', en: 'cat', url: getCat},
+  {value: 'bunny', tr: 'tavşan', en: 'bunny', url: getBunny},
+  {value: 'duck', tr: 'ördek', en: 'duck', url: getDuck},
+  {value: 'fox', tr: 'tilki', en: 'fox', url: getFox},
+  {value: 'koala', tr: 'koala', en: 'koala', url: getKoala},
+  {value: 'panda', tr: 'panda', en: 'panda', url: getPanda},
   {value: 'lion', tr: 'aslan', en: 'lion', url: getLion},
   {value: 'monkey', tr: 'maymun', en: 'monkey', url: getMonkey},
 ];
@@ -138,6 +138,12 @@ export const colors = [
   {value: 'pink', tr: 'pembe', en: 'pink'},
   {value: 'turquoise', tr: 'turkuaz', en: 'turquoise'},
   {value: 'grey', tr: 'gri', en: 'grey'},
+  {value: 'fuchsia', tr: 'fuşya', en: 'fuchsia'},
+  {value: 'brown', tr: 'kahverengi', en: 'brown'},
+  {value: 'silver', tr: 'gümüş', en: 'silver'},
+  {value: 'wheat', tr: 'buğday', en: 'wheat'},
+  {value: 'khaki', tr: 'haki', en: 'khaki'},
+  {value: 'beige', tr: 'bej', en: 'beige'},
 ];
 export const objects = [
   {value: 'table', tr: 'masa', en: 'table'},

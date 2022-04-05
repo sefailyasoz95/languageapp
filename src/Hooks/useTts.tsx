@@ -21,7 +21,6 @@ const useTts = () => {
       err => {
         if (err) {
           console.log('err: ', err);
-
           // Tts.requestInstallEngine();
           // Tts.requestInstallData();
         }

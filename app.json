@@ -1,4 +1,7 @@
 {
   "name": "languageApp",
-  "displayName": "languageApp"
+  "displayName": "languageApp",
+  "expo": {
+    "plugins": ["@react-native-voice/voice"]
+  }
 }

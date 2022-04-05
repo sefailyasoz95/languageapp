@@ -20,5 +20,9 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<!-- <key>NSMicrophoneUsageDescription</key>
+  	<string>Sesli arama yapabilmek için uygulamanın mikrofona erişmesi gerekiyor.</string>
+  	<key>NSSpeechRecognitionUsageDescription</key>
+  	<string>Aranan kelimeyi anlayabilmesi için uygulamanın ses tanıma özelliğine erişmesi gerekiyor.</string> -->
 </dict>
 </plist>

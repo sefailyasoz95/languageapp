@@ -1,14 +1,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {getAllAnimals} from '../actions/animalActions';
 import {login, register} from '../actions/authActions';
 import {getAllCategories} from '../actions/categoryActions';
+import {getAllObjects} from '../actions/objectActions';
 const initialState = {
   categories: [],
-  isFetchingCategories: true,
+  isFetchingCategories: false,
   objects: [],
-  isFetchingObjects: true,
+  isFetchingObjects: false,
   animals: [],
-  isFetchingAnimals: true,
+  isFetchingAnimals: false,
   error: false,
   success: false,
   message: '',
@@ -76,6 +78,30 @@ export const reducer = createSlice({
         state.message = action.payload.message;
         state.error = true;
         state.isFetchingCategories = false;
+      })
+      .addCase(getAllAnimals.pending, state => {
+        state.isFetchingAnimals = true;
+      })
+      .addCase(getAllAnimals.fulfilled, (state, action: any) => {
+        state.animals = action.payload.animals;
+        state.isFetchingAnimals = false;
+      })
+      .addCase(getAllAnimals.rejected, (state, action: any) => {
+        state.message = action.payload.message;
+        state.error = true;
+        state.isFetchingAnimals = false;
+      })
+      .addCase(getAllObjects.pending, state => {
+        state.isFetchingObjects = true;
+      })
+      .addCase(getAllObjects.fulfilled, (state, action: any) => {
+        state.objects = action.payload.objects;
+        state.isFetchingObjects = false;
+      })
+      .addCase(getAllObjects.rejected, (state, action: any) => {
+        state.message = action.payload.message;
+        state.error = true;
+        state.isFetchingObjects = false;
       });
   },
 });

@@ -33,6 +33,7 @@ type Props = {
   name?: string;
   placeholderColor?: string;
   secureTextEntry?: boolean;
+  defaultValue?: string;
 };
 
 const Input: React.FC<Props> = ({
@@ -52,6 +53,7 @@ const Input: React.FC<Props> = ({
   name,
   textStyle,
   placeholderColor,
+  defaultValue,
 }) => {
   const [inputError, setInputError] = useState(false);
   const placeholderRef = useRef(
@@ -99,6 +101,7 @@ const Input: React.FC<Props> = ({
       </Animated.Text>
       <TextInput
         ref={inputRef}
+        defaultValue={defaultValue}
         testID={testID || 'textinput'}
         style={[styles.input, inputStyleHelper(type), textStyle]}
         keyboardType={keyboardType}
