@@ -1,4 +1,3 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from './src/Redux/store/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';

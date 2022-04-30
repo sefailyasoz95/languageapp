@@ -30,21 +30,21 @@ const useTts = () => {
     // Tts.engines().then(engines => console.log('engines: ', engines));
   }, []);
   const speakTR = async (text: string) => {
-    // Platform.OS === 'android'
-    //   ? await Tts.setDefaultVoice('tr-TR-language').then(async res => {
-    //       Tts.speak(text, optionsTR);
-    //     })
-    //   : Tts.speak(text, optionsTR);
-    Tts.speak(text, optionsTR);
+    Platform.OS === 'android'
+      ? await Tts.setDefaultVoice('tr-TR-language').then(async res => {
+          Tts.speak(text, optionsTR);
+        })
+      : Tts.speak(text, optionsTR);
+    // Tts.speak(text, optionsTR);
   };
 
   const speakEN = async (text: string) => {
-    // Platform.OS === 'android'
-    //   ? await Tts.setDefaultVoice('en-us-x-tpf-local').then(async res => {
-    //       Tts.speak(text, options);
-    //     })
-    //   : Tts.speak(text, options);
-    Tts.speak(text, options);
+    Platform.OS === 'android'
+      ? await Tts.setDefaultVoice('en-us-x-tpf-local').then(async res => {
+          Tts.speak(text, options);
+        })
+      : Tts.speak(text, options);
+    // Tts.speak(text, options);
   };
   return {speakTR, speakEN};
 };
